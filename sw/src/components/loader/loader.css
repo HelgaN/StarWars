@@ -46,6 +46,10 @@
   }
 }
 
+.lds-double-wrapper {
+  width: 100%;
+}
+
 .lds-double-ring {
   position: relative;
 }
