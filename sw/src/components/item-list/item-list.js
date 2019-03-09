@@ -25,11 +25,11 @@ export default class ItemList extends Component {
       });
   };
 
-  renderItems = (arr) => {
-
+  renderItems(arr) {
     return arr.map((item) => {
+      console.log(this.props.children);
       const { id } = item;
-      const label = this.props.renderItem(item);
+      const label = this.props.children(item);
 
       return (
         <li className="list-group-item"
