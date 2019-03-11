@@ -12,7 +12,7 @@ const {
 } = swapiService;
 
 const withChildFunction = (Wrapped, fn) => {
-  return (props) => {
+  return (props) => {    
     return (<Wrapped {...props} >
       {fn}
     </Wrapped>);
