@@ -67,7 +67,6 @@ export default class ItemDetails extends Component {
 
     const loader = loading ? <Loader /> : null;
   /*  const content = !loading ? {itemView} : null;*/
-    console.log(this.props.children);
 
     return (
     <div className="person-details card">
