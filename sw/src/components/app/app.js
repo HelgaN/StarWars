@@ -68,7 +68,6 @@ export default class App extends Component {
           <div className="row mb-2">
             <div className="col-md-6">
               <PersonList>
-                { ({name}) => <span>{name}</span> }
               </PersonList>
               <PersonDetails itemId={11} />
             </div>
@@ -77,7 +76,6 @@ export default class App extends Component {
           <div className="row mb-2">
             <div className="col-md-6">
               <StarshipList>
-                { ({name}) => <span>{name}</span> }
               </StarshipList>
               <StarshipDetails itemId={11} />
             </div>
@@ -86,7 +84,6 @@ export default class App extends Component {
           <div className="row mb-2">
             <div className="col-md-6">
               <PlanetList>
-                { ({name}) => <span>{name}</span> }
               </PlanetList>
               <PlanetDetails itemId={11} />
             </div>
