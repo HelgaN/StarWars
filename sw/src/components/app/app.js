@@ -16,6 +16,8 @@ import { PersonList,
   StarshipDetails
  } from '../sw-components';
 
+ import { SwapiServiceProvider } from '../swapi-sevice-context';
+
 import './app.css';
 
 export default class App extends Component {
@@ -59,6 +61,7 @@ export default class App extends Component {
     </ItemDetails>
 
     return (
+      <SwapiServiceProvider value={this.swapiService} >
       <div className="container">
         <Header />
         <RandomPlanet />
@@ -90,6 +93,7 @@ export default class App extends Component {
           </div>
 
       </div>
+    </SwapiServiceProvider>
     );
   };
 };
