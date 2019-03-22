@@ -34,7 +34,9 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.itemId !== prevProps.itemId) {  // IF обязательно при обновлении State
+    if(this.props.itemId !== prevProps.itemId
+    || this.props.getData !== prevProps.getData
+    || this.props.getImageUrl !== prevProps.getImageUrl) {  // IF обязательно при обновлении State
       this.updateItem();
       this.state.loading = false;
     }

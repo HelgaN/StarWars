@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import SwapiService from '../../services/swapi';
+import DummySwapiService from '../../services/dummy-swapi';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
@@ -22,11 +23,21 @@ import './app.css';
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
-    hasError: false
+    hasError: false,
+    swapiService: new SwapiService()
   }
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ?
+               DummySwapiService : SwapiService;
+      return {
+        swapiService: new Service()
+      }
+
+    });
+  };
 
   componentDidCatch() {
     this.setState({
@@ -40,7 +51,7 @@ export default class App extends Component {
       return <ErrorIndicator />
     }
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.state.swapiService;
 
     const personDetails = (<ItemDetails
     itemId={11}
@@ -61,9 +72,9 @@ export default class App extends Component {
     </ItemDetails>
 
     return (
-      <SwapiServiceProvider value={this.swapiService} >
+      <SwapiServiceProvider value={this.state.swapiService} >
       <div className="container">
-        <Header />
+        <Header onServiceChange={this.onServiceChange} />
         <RandomPlanet />
 
         <Row left={personDetails} right={starshipDetails} />
