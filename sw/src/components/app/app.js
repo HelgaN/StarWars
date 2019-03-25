@@ -4,20 +4,8 @@ import SwapiService from '../../services/swapi';
 import DummySwapiService from '../../services/dummy-swapi';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
-import PeoplePage from '../people-page';
-import ItemList from '../item-list';
-import ItemDetails from '../item-details';
-import { Record } from '../item-details/item-details';
-import Row from '../row';
-import { PersonList,
-  PlanetList,
-  StarshipList,
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails
- } from '../sw-components';
-
- import { SwapiServiceProvider } from '../swapi-sevice-context';
+import { SwapiServiceProvider } from '../swapi-sevice-context';
+import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
 
 import './app.css';
 
@@ -50,7 +38,7 @@ export default class App extends Component {
     if(this.state.hasError) {
       return <ErrorIndicator />
     }
-
+/*
     const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.state.swapiService;
 
     const personDetails = (<ItemDetails
@@ -70,38 +58,16 @@ export default class App extends Component {
       <Record field="length" label="Length" />
       <Record field="costInCredits" label="Cost" />
     </ItemDetails>
-
+*/
     return (
       <SwapiServiceProvider value={this.state.swapiService} >
       <div className="container">
         <Header onServiceChange={this.onServiceChange} />
         <RandomPlanet />
 
-        <Row left={personDetails} right={starshipDetails} />
-
-          <div className="row mb-2">
-            <div className="col-md-6">
-              <PersonList>
-              </PersonList>
-              <PersonDetails itemId={11} />
-            </div>
-          </div>
-
-          <div className="row mb-2">
-            <div className="col-md-6">
-              <StarshipList>
-              </StarshipList>
-              <StarshipDetails itemId={11} />
-            </div>
-          </div>
-
-          <div className="row mb-2">
-            <div className="col-md-6">
-              <PlanetList>
-              </PlanetList>
-              <PlanetDetails itemId={11} />
-            </div>
-          </div>
+        <PeoplePage />
+        <PlanetsPage />
+        <StarshipsPage />
 
       </div>
     </SwapiServiceProvider>
