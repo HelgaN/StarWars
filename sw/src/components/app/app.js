@@ -9,6 +9,8 @@ import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
 
 import './app.css';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 export default class App extends Component {
 
   state = {
@@ -61,16 +63,18 @@ export default class App extends Component {
 */
     return (
       <SwapiServiceProvider value={this.state.swapiService} >
-      <div className="container">
-        <Header onServiceChange={this.onServiceChange} />
-        <RandomPlanet />
+        <Router>
+          <div className="container">
+            <Header onServiceChange={this.onServiceChange} />
+            <RandomPlanet />
 
-        <PeoplePage />
-        <PlanetsPage />
-        <StarshipsPage />
+            <Route path="/people" component={PeoplePage} />
+            <Route path="/planets" component={PlanetsPage} />
+            <Route path="/starships" component={StarshipsPage} />
 
-      </div>
-    </SwapiServiceProvider>
+          </div>
+        </Router>
+      </SwapiServiceProvider>
     );
   };
 };
