@@ -11,7 +11,7 @@ const {
   getAllStarships
 } = swapiService;
 */
-const withChildFunction = (Wrapped, fn) => {
+const withChildFunction = (fn) => (Wrapped) => {
   return (props) => {
     return (<Wrapped {...props} >
       {fn}
@@ -40,16 +40,21 @@ const mapStarshipsMethodsToProps = (swapiService) => {
   };
 };
 
-const PersonList = withSwapiService(
+const PersonList = withSwapiService(mapPersonMethodsToProps)(
   withData(
-    withChildFunction(ItemList, renderName)), mapPersonMethodsToProps);
+    withChildFunction(renderName)(
+      ItemList)));
 
-const PlanetList = withSwapiService(
-  withData(withChildFunction(ItemList, renderName)), mapPlanetsMethodsToProps);
+const PlanetList = withSwapiService(mapPlanetsMethodsToProps)(
+  withData(
+    withChildFunction(renderName)(
+      ItemList)));
 
 
-const StarshipList = withSwapiService(
-  withData(withChildFunction(ItemList, renderModelAndName)), mapStarshipsMethodsToProps);
+const StarshipList = withSwapiService(mapStarshipsMethodsToProps)(
+  withData(
+    withChildFunction(renderModelAndName)(
+      ItemList)));
 
 
 // const composition = (x) => f(g(x));  пример композиции в native js
