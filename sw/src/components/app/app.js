@@ -6,6 +6,7 @@ import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
 import { SwapiServiceProvider } from '../swapi-sevice-context';
 import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import StarshipDetails from "../sw-components/starship-details";
 
 import './app.css';
 
@@ -68,9 +69,13 @@ export default class App extends Component {
             <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet />
 
+            <Route path="/" render={() => <h2>Welcom to SPA "StarWars-DB"</h2>} exact />
             <Route path="/people" component={PeoplePage} />
             <Route path="/planets" component={PlanetsPage} />
-            <Route path="/starships" component={StarshipsPage} />
+            <Route path="/starships" exact component={StarshipsPage} />
+            <Route path="/starships/:id" render={({match, location, history}) =>
+              { const { id } = match.params;
+                return <StarshipDetails itemId={id} />}} />
 
           </div>
         </Router>
