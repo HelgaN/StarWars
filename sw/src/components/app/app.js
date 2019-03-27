@@ -5,7 +5,13 @@ import DummySwapiService from '../../services/dummy-swapi';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
 import { SwapiServiceProvider } from '../swapi-sevice-context';
-import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import {
+  PeoplePage,
+  PlanetsPage,
+  StarshipsPage,
+  LoginPage,
+  SecretPage
+ } from '../pages';
 import StarshipDetails from "../sw-components/starship-details";
 
 import './app.css';
@@ -16,8 +22,15 @@ export default class App extends Component {
 
   state = {
     hasError: false,
-    swapiService: new SwapiService()
-  }
+    swapiService: new SwapiService(),
+    isLoggedIn: false
+  };
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    });
+  };
 
   onServiceChange = () => {
     this.setState(({ swapiService }) => {
@@ -62,6 +75,8 @@ export default class App extends Component {
       <Record field="costInCredits" label="Cost" />
     </ItemDetails>
 */
+    const { isLoggedIn } = this.state;
+
     return (
       <SwapiServiceProvider value={this.state.swapiService} >
         <Router>
@@ -70,12 +85,21 @@ export default class App extends Component {
             <RandomPlanet />
 
             <Route path="/" render={() => <h2>Welcom to SPA "StarWars-DB"</h2>} exact />
-            <Route path="/people" component={PeoplePage} />
+            <Route path="/people/:id?" component={PeoplePage} />
             <Route path="/planets" component={PlanetsPage} />
             <Route path="/starships" exact component={StarshipsPage} />
             <Route path="/starships/:id" render={({match, location, history}) =>
               { const { id } = match.params;
                 return <StarshipDetails itemId={id} />}} />
+            <Route path="/login" render={() => (
+                <LoginPage
+                  isLoggedIn={isLoggedIn}
+                  onLogin={this.onLogin}
+                />)} />
+            <Route path="/secret" render={() => (
+                <SecretPage
+                  isLoggedIn={isLoggedIn}
+                />)} />
 
           </div>
         </Router>
