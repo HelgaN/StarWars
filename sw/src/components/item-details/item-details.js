@@ -67,7 +67,8 @@ export default class ItemDetails extends Component {
     const { loading, item, image } = this.state;
     const { name } = item;
 
-    const loader = loading ? <Loader /> : null;
+    const loader = loading;
+    if(loading) return <Loader />;
   /*  const content = !loading ? {itemView} : null;*/
 
     return (
